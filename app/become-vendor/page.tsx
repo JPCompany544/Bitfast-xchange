@@ -32,7 +32,7 @@ export default function BecomeVendorPage() {
           </p>
           <button
             onClick={() => window.location.href = "/"}
-            className="mt-8 w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-[#0052ff] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0052ff]"
+            className="mt-8 w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-[#7592f0] hover:bg-[#5c7ae0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7592f0]"
           >
             Return to Home
           </button>
@@ -62,7 +62,7 @@ export default function BecomeVendorPage() {
                   <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
                   <div className="mt-2">
                     <input type="text" name="fullName" id="fullName" required
-                      className="block w-full shadow-sm focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
+                      className="block w-full shadow-sm focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
                       placeholder="John Doe" />
                   </div>
                 </div>
@@ -71,7 +71,7 @@ export default function BecomeVendorPage() {
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
                   <div className="mt-2">
                     <input type="email" name="email" id="email" required
-                      className="block w-full shadow-sm focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
+                      className="block w-full shadow-sm focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
                       placeholder="john@example.com" />
                   </div>
                 </div>
@@ -80,7 +80,7 @@ export default function BecomeVendorPage() {
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
                   <div className="mt-2">
                     <input type="tel" name="phone" id="phone" required
-                      className="block w-full shadow-sm focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
+                      className="block w-full shadow-sm focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
                       placeholder="+1 (555) 000-0000" />
                   </div>
                 </div>
@@ -89,7 +89,7 @@ export default function BecomeVendorPage() {
                   <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country</label>
                   <div className="mt-2">
                     <select id="country" name="country" required
-                      className="block w-full shadow-sm focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
+                      className="block w-full shadow-sm focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
                       <option value="">Select a country</option>
                       <option>United States</option>
                       <option>United Kingdom</option>
@@ -151,7 +151,7 @@ export default function BecomeVendorPage() {
                   <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">Business Name</label>
                   <div className="mt-2">
                     <input type="text" name="businessName" id="businessName" required={accountType === "Business"}
-                      className="block w-full shadow-sm focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
+                      className="block w-full shadow-sm focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border"
                       placeholder="Your Company LLC" />
                   </div>
                 </div>
@@ -169,7 +169,7 @@ export default function BecomeVendorPage() {
                       <span className="text-gray-500 sm:text-sm">$</span>
                     </div>
                     <select id="tradingVolume" name="tradingVolume" required
-                      className="block w-full pl-7 focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
+                      className="block w-full pl-7 focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
                       <option value="">Select volume</option>
                       <option value="0-10k">Less than $10,000</option>
                       <option value="10k-50k">$10,000 - $50,000</option>
@@ -183,7 +183,7 @@ export default function BecomeVendorPage() {
                   <label htmlFor="cryptoExperience" className="block text-sm font-medium text-gray-700">Years of Crypto Experience</label>
                   <div className="mt-2">
                     <select id="cryptoExperience" name="cryptoExperience" required
-                      className="block w-full focus:ring-[#0052ff] focus:border-[#0052ff] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
+                      className="block w-full focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
                       <option value="">Select experience</option>
                       <option value="<1">Less than 1 year</option>
                       <option value="1-3">1 to 3 years</option>
@@ -200,7 +200,7 @@ export default function BecomeVendorPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex justify-center py-4 px-4 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-[#0052ff] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0052ff] disabled:opacity-70 transition-all duration-200"
+                className="w-full flex justify-center py-4 px-4 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-[#7592f0] hover:bg-[#5c7ae0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7592f0] disabled:opacity-70 transition-all duration-200"
               >
                 {isSubmitting ? "Submitting Application..." : "Submit Application"}
               </button>
@@ -215,3 +215,4 @@ export default function BecomeVendorPage() {
     </div>
   );
 }
+

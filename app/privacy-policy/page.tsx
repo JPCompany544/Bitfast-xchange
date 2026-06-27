@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 export default function PrivacyPolicyPage() {
@@ -9,7 +11,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="prose prose-blue max-w-none text-gray-700 space-y-6">
           <p>
-            This Privacy and Data Retention Policy (the Policy) explains the way in which Marella LLC hereinafter referred to as "Changelly") and Alqentra LLC (hereinafter referred to as "ChangellyPRO") collect, use, share, and protect Personal Information of Users ("you") obtained through changelly.com and pro.changelly.com ("Websites"), any related applications (including but not limited to the mobile one) and exchange tools integrated into third party services ("Services"). The terms "we," "us," and "our" refer to the entities indicated below.
+            This Privacy and Data Retention Policy (the Policy) explains the way in which BitFast Xchange (hereinafter referred to as "BitFast Xchange") collects, uses, shares, and protects Personal Information of Users ("you") obtained through www.bitfast-xchange.com ("Website"), any related applications (including but not limited to the mobile one) and exchange tools integrated into third party services ("Services"). The terms "we," "us," and "our" refer to BitFast Xchange.
           </p>
 
           <p>
@@ -27,8 +29,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">1. Who We Are</h2>
           <p>The Personal Information is collected, controlled and processed by the following entities:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>1.1.1</strong> Marella LLC, contact e-mail: support@changelly.com</li>
-            <li><strong>1.1.2</strong> Alqentra LLC, contact e-mail: support@pro.changelly.com</li>
+            <li><strong>1.1.1</strong> BitFast Xchange, contact e-mail: support@bitfast-xchange.com</li>
           </ul>
 
           <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">2. Personal Information Which We May Collect</h2>
@@ -73,7 +74,7 @@ export default function PrivacyPolicyPage() {
           <p><strong>6.3</strong> You can manage browser cookies through your browser settings. The "Help" feature on most browsers will tell you how to prevent your browser from accepting new cookies, how to have the browser notify you when you receive a new cookie, how to disable cookies, and when cookies will expire. If you disable all cookies on your browser, neither we nor third parties will transfer cookies to your browser. If you do this, however, you may have to manually adjust some preferences every time you visit a Website and some features and services may not work.</p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">7. Security Measures</h2>
-          <p><strong>7.1</strong> Changelly aims to protect your information as much as we aim to protect our own information and network. We will not permit any third parties to contact you directly on an unsolicited basis in relation to their own products or services. We do not sell, trade, or rent your personal identification information to others. You should never disclose your account password to unauthorized parties.</p>
+          <p><strong>7.1</strong> BitFast Xchange aims to protect your information as much as we aim to protect our own information and network. We will not permit any third parties to contact you directly on an unsolicited basis in relation to their own products or services. We do not sell, trade, or rent your personal identification information to others. You should never disclose your account password to unauthorized parties.</p>
           <p><strong>7.2</strong> We use certain security measures to help keep your personal information safe, but we cannot guarantee that these measures will stop any users try to get around the privacy or security settings on the Website and Services platform through unforeseen and/or illegal activity. That is why we make no warranty, express, implied or otherwise, that we will prevent such access.</p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">8. How We Can Disclose Your Information</h2>
@@ -101,7 +102,7 @@ export default function PrivacyPolicyPage() {
           <p>This Policy may be amended at our full discretion without prior notice. We encourage you to review it periodically in order to be aware of the changes we may have made. Reading it carefully and checking for any modifications is your responsibility. By using the Services, you accept and agree to the Policy and the Terms of Use.</p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">12. Contact Us</h2>
-          <p>If you have any questions about this Policy, please contact us via legal@changelly.com.</p>
+          <p>If you have any questions about this Policy, please contact us via support@bitfast-xchange.com.</p>
         </div>
       </div>
     </div>

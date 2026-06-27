@@ -81,8 +81,8 @@ function P2PContent() {
           {/* Top Filters */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex bg-white border border-gray-200 rounded-[12px] p-1 shadow-sm">
-              <a href="?mode=buy" className={`px-5 py-2 text-[14px] font-semibold rounded-[8px] transition-colors ${mode === "buy" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-900"}`}>Buy</a>
-              <a href="?mode=sell" className={`px-5 py-2 text-[14px] font-semibold rounded-[8px] transition-colors ${mode === "sell" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-900"}`}>Sell</a>
+              <a href="?mode=buy" className={`px-5 py-2 text-[14px] font-semibold rounded-[8px] transition-colors ${mode === "buy" ? "bg-[#b1ff8c] text-gray-900" : "text-gray-500 hover:text-gray-900"}`}>Buy</a>
+              <a href="?mode=sell" className={`px-5 py-2 text-[14px] font-semibold rounded-[8px] transition-colors ${mode === "sell" ? "bg-[#ff8c8c] text-white" : "text-gray-500 hover:text-gray-900"}`}>Sell</a>
             </div>
           </div>
         </div>

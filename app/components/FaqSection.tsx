@@ -4,11 +4,11 @@ import { useState } from "react";
 const faqs = [
   {
     q: "How to buy cryptocurrency?",
-    a: "In 2020, we introduced a cryptocurrency marketplace Changelly Buy. As of today, users can instantly buy crypto with a credit card (Visa, Mastercard), bank transfer, or Apple Pay. The Changelly Buy crypto marketplace partners with the leading fiat gateways to offer you deep liquidity and the best execution prices on the market. Can't decide which cryptocurrency to buy? Changelly lists over 1000 crypto assets, including the most popular ones. Buy Bitcoin, Ethereum, Ripple, and other cryptos with ease. Just sign up for a Changelly account, choose the cryptocurrency you would like to purchase, select the best offer provided, enter the address of your digital wallet, and voilà! Now, you are a proud crypto owner.",
+    a: "BitFast Xchange makes it easy to buy crypto instantly. Users can buy crypto with a credit card (Visa, Mastercard), bank transfer, or Apple Pay. Our marketplace partners with the leading fiat gateways to offer deep liquidity and the best execution prices on the market. Can't decide which cryptocurrency to buy? BitFast Xchange supports a wide range of crypto assets, including the most popular ones. Buy Bitcoin, Ethereum, Ripple, and other cryptos with ease. Just sign up for a BitFast Xchange account, choose the cryptocurrency you would like to purchase, select the best offer provided, enter the address of your digital wallet, and voilà! Now, you are a proud crypto owner.",
   },
   {
-    q: "Who are Changelly's fiat partners?",
-    a: "Changelly Buy supports over 100 fiat currencies. So, if you would like to purchase crypto with fiat, you can buy crypto online with your native currency at any time. To date, we closely work with the following fiat-to-crypto providers: MoonPay, Simplex, Banxa, and others. We are constantly monitoring the market to extend this list and provide you with a range of execution prices that will suit you the most.",
+    q: "Who are BitFast Xchange's payment partners?",
+    a: "BitFast Xchange supports over 100 fiat currencies. So, if you would like to purchase crypto with fiat, you can buy crypto online with your native currency at any time. We work closely with the leading fiat-to-crypto providers to offer you a range of execution prices that will suit you the most. We are constantly monitoring the market to extend our partner list.",
   },
   {
     q: "What is the minimum order amount I can purchase crypto with?",
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "How can I contact you?",
-    a: (<>You can contact us at any time via the Live chat below. Both the Support team and the Changelly digital currency exchange work 24/7 and will be glad to help. You can also send us an email at <a className="underline text-content-link" href="mailto:support@changelly.com">support@changelly.com</a>.</>),
+    a: (<>You can contact us at any time via the Live chat below. Both the Support team and the BitFast Xchange platform work 24/7 and will be glad to help. You can also send us an email at <a className="underline text-content-link" href="mailto:support@bitfast-xchange.com">support@bitfast-xchange.com</a>.</>),
   },
 ];
 

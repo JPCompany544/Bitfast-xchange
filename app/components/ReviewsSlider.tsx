@@ -7,7 +7,7 @@ const REVIEWS = [
   { name: "Ron Cave", text: "Superb, super easy to use from sign up to exchanging crypto, would recommend to anyone. Well done team." },
   { name: "Peter Vell", text: "First time I found it easy to use the customer service support is extremely helpful to any problem that you have 5 star's guys keep up the good work" },
   { name: "Chris", text: "Very easy once you get used to it. A lot of decentralized coins available that you cannot as easily get elsewhere. Just take your time and work slow and you will not have any errors." },
-  { name: "Pont", text: "Changelly is a very friendly. The Customer Support is second to none." },
+  { name: "Pont", text: "BitFast Xchange is very friendly. The Customer Support is second to none." },
   { name: "Kev", text: "Great exchange especially for smaller transactions. Multiple platforms to purchase from and it's instant. Now waiting time depending on your coin." }
 ];
 
