@@ -48,8 +48,7 @@ export default function Home() {
         {/* Supported Payment Methods */}
         <div className="max-w-[1440px] px-[16px] tabletLarge:px-[48px] desktop:!px-[64px] desktopExtraLarge:!px-0 mx-auto pb-6 tablet:pb-[48px] desktop:pb-[96px] pt-12 desktop:pt-[32px] w-full">
           <div className="flex items-center space-x-[14px] overflow-hidden mx-auto relative w-full mb-[48px] tabletHorizontal:mb-[82px] max-w-full">
-            <div className="absolute left-0 top-0 bottom-0 w-[50px] bg-gradient-to-r from-[#fdfdfe] to-transparent z-10"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-[50px] bg-gradient-to-l from-[#fdfdfe] to-transparent z-10"></div>
+
             {[1, 2, 3].map((idx) => (
               <ul key={idx} className="flex items-center space-x-[24px] desktopSmall:space-x-[27px] flex-shrink-0 animate-marquee">
                 <li className="flex-shrink-0 text-center"><img src="https://payload-marketing.moonpay.com/api/media/file/mc-1.png" alt="mc" className="w-auto h-[50px] object-contain" /></li>
