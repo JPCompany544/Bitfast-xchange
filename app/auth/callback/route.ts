@@ -18,6 +18,7 @@ export async function GET(request: Request) {
     }
   }
 
-  // Something went wrong — send back to signup with error
-  return NextResponse.redirect(`${origin}/signup?error=confirmation_failed`);
+  // If we reach here, the OTP was invalid or already consumed (e.g. by an email scanner).
+  // The user's email is likely already confirmed, so we redirect them to log in.
+  return NextResponse.redirect(`${origin}/login?message=Link+expired+or+already+used.+If+you+recently+confirmed,+you+can+sign+in+now.`);
 }

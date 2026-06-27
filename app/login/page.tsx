@@ -1,20 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [infoMessage, setInfoMessage] = useState<string | null>(null);
+  const [resending, setResending] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
+
+  useEffect(() => {
+    const msg = searchParams.get("message");
+    if (msg) {
+      setInfoMessage(msg);
+    }
+  }, [searchParams]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setInfoMessage(null);
+    setResendSuccess(false);
     setLoading(true);
 
     const supabase = createClient();
@@ -40,7 +53,29 @@ export default function LoginPage() {
     }
   };
 
+  const handleResendConfirmation = async () => {
+    setResending(true);
+    setError(null);
+    const supabase = createClient();
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/buy-crypto`,
+      }
+    });
+
+    if (error) {
+      setError(error.message);
+    } else {
+      setResendSuccess(true);
+      setError(null);
+    }
+    setResending(false);
+  };
+
   const isFormValid = email.length > 0 && password.length >= 6;
+  const isEmailNotConfirmed = error?.toLowerCase().includes("email not confirmed");
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-6 py-12">
@@ -58,10 +93,34 @@ export default function LoginPage() {
               </p>
             </div>
 
+            {/* Info banner */}
+            {infoMessage && !error && (
+              <div className="w-full bg-[#f0fcf5] border border-[#a6f4c5] rounded-[8px] px-4 py-3 text-[14px] text-[#09853b] font-medium">
+                {infoMessage}
+              </div>
+            )}
+
+            {/* Success banner for resend */}
+            {resendSuccess && !error && (
+              <div className="w-full bg-[#f0fcf5] border border-[#a6f4c5] rounded-[8px] px-4 py-3 text-[14px] text-[#09853b] font-medium">
+                Confirmation email sent! Please check your inbox.
+              </div>
+            )}
+
             {/* Error banner */}
             {error && (
-              <div className="w-full bg-[#fff5f6] border border-[#fcb3ba] rounded-[8px] px-4 py-3 text-[14px] text-[#cf2030] font-medium">
-                {error}
+              <div className="w-full bg-[#fff5f6] border border-[#fcb3ba] rounded-[8px] px-4 py-3 flex flex-col gap-2">
+                <span className="text-[14px] text-[#cf2030] font-medium">{error}</span>
+                {isEmailNotConfirmed && (
+                  <button
+                    type="button"
+                    onClick={handleResendConfirmation}
+                    disabled={resending}
+                    className="self-start text-[13px] font-semibold text-[#cf2030] underline hover:text-[#a01623] disabled:opacity-50"
+                  >
+                    {resending ? "Sending..." : "Resend confirmation email"}
+                  </button>
+                )}
               </div>
             )}
 
@@ -142,5 +201,20 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <svg className="animate-spin w-8 h-8 text-[#0052ff]" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+        </svg>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
