@@ -1,15 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
+
+  --color-bg-default: #f7f9fd;
+  --color-bg-elevated: #fff;
+  --color-bg-secondary: #ebeef7;
+  --color-bg-popup: #242b42;
+  --color-bg-overlay: rgba(36,43,66,.63);
+  --color-bg-lightgreen: #d0ffba;
+  --color-button-primary: #b1ff8c;
+  --color-button-primary-hover: #a4f77d;
+  --color-button-primary-content: #0a0a0a;
+  --color-button-secondary: #eef0f6;
+  --color-button-secondary-hover: #e4e7f1;
+  --color-interactive-accent: #7592f0;
+  --color-interactive-accent-hover: #5f7ddd;
+  --color-interactive-secondary: #e4e7f1;
+  --color-interactive-secondary-hover: #d6d9e6;
+  --color-interactive-contrast: #61d629;
+  --color-interactive-primary: #0a0a0a;
+  --color-interactive-primary-hover: rgb(20 35 82/7%);
+  --color-border-default: #b9bbc6;
+  --color-border-hover: #73788c;
+  --color-border-active: #363a49;
+  --color-border-static: #d3d5de;
+  --color-content-primary: #0a0a0a;
+  --color-content-secondary: #4c5167;
+  --color-content-tertiary: #9096ac;
+  --color-content-link: #4159aa;
+  --color-content-inverted: #fff;
+  --color-icon-default: #676c7e;
+  --color-icon-active: #7089db;
+  --color-base-white: #fff;
+  --color-base-black: #0a0a0a;
+  --color-base-green: #b1ff8c;
+  --color-base-blue: #93acff;
+  --color-offer-card-bg: #bfff40;
+  --color-offer-card-text: #000;
+  
+  --background-image-gradient-greenDay: linear-gradient(270deg,#9fcf00,#00d44b,#009be3);
+  
+  --radius-xs: 2px;
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-3xl: 40px;
+  --radius-40: 40px;
+  --radius-8: 8px;
+  --radius-2: 2px;
+
+  /* Custom breakpoints for the new homepage layout */
+  --breakpoint-tablet: 768px;
+  --breakpoint-tabletLarge: 960px;
+  --breakpoint-tabletHorizontal: 1024px;
+  --breakpoint-desktopSmall: 1280px;
+  --breakpoint-desktop: 1440px;
+  --breakpoint-desktopLarge: 1536px;
+  --breakpoint-desktopExtraLarge: 1920px;
+
+  /* Specific base colors for the cards */
+  --color-base-card: #f9f8f5;
+  --color-base-black: #000000;
+  --color-neutral-solid-50: #fefefe;
+}
+
+:root {
+  --background: #f7f9fd;
+  --foreground: #0a0a0a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +85,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }
