@@ -1,20 +1,105 @@
 "use client";
 
 import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+
+const COUNTRIES = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
+  "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+  "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Côte d'Ivoire", "Cabo Verde",
+  "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Congo-Brazzaville)",
+  "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+  "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland",
+  "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea",
+  "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
+  "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait",
+  "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
+  "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru",
+  "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman",
+  "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
+  "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
+  "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia",
+  "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria",
+  "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
+  "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela",
+  "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
 
 export default function BecomeVendorPage() {
   const [accountType, setAccountType] = useState<"Individual" | "Business">("Individual");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [file, setFile] = useState<File | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const supabase = createClient();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setErrorMsg("");
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      
+      let documentUrl = "";
+      
+      if (file) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
+        const filePath = `applications/${fileName}`;
+
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("verification_documents")
+          .upload(filePath, file);
+
+        if (uploadError) {
+          throw new Error("Failed to upload document: " + uploadError.message);
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from("verification_documents")
+          .getPublicUrl(filePath);
+          
+        documentUrl = publicUrlData.publicUrl;
+      } else {
+        throw new Error("Please upload a valid government ID.");
+      }
+
+      const applicationData = {
+        full_name: formData.get("fullName") as string,
+        email: formData.get("email") as string,
+        phone: formData.get("phone") as string,
+        country: formData.get("country") as string,
+        id_document_url: documentUrl,
+        account_type: accountType,
+        business_name: accountType === "Business" ? formData.get("businessName") as string : null,
+        trading_volume: formData.get("tradingVolume") as string,
+        crypto_experience: formData.get("cryptoExperience") as string,
+        status: "pending"
+      };
+
+      const { error: insertError } = await supabase
+        .from("vendor_applications")
+        .insert([applicationData]);
+
+      if (insertError) {
+        throw new Error("Failed to submit application: " + insertError.message);
+      }
+
       setIsSubmitted(true);
-    }, 1500);
+    } catch (err: any) {
+      setErrorMsg(err.message || "An unexpected error occurred.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -54,6 +139,12 @@ export default function BecomeVendorPage() {
         <div className="bg-white py-10 px-6 shadow-sm rounded-2xl border border-gray-100 sm:px-10">
           <form className="space-y-10" onSubmit={handleSubmit}>
             
+            {errorMsg && (
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm">
+                {errorMsg}
+              </div>
+            )}
+
             {/* Section: Personal Details */}
             <div>
               <h3 className="text-xl leading-6 font-semibold text-gray-900 mb-6 border-b border-gray-100 pb-3">Personal Details</h3>
@@ -91,12 +182,9 @@ export default function BecomeVendorPage() {
                     <select id="country" name="country" required
                       className="block w-full shadow-sm focus:ring-[#7592f0] focus:border-[#7592f0] sm:text-sm border-gray-300 rounded-md h-12 px-4 bg-gray-50 border">
                       <option value="">Select a country</option>
-                      <option>United States</option>
-                      <option>United Kingdom</option>
-                      <option>Nigeria</option>
-                      <option>Canada</option>
-                      <option>Australia</option>
-                      {/* Add more countries as needed */}
+                      {COUNTRIES.map((country) => (
+                        <option key={country} value={country}>{country}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -107,17 +195,17 @@ export default function BecomeVendorPage() {
             <div>
               <h3 className="text-xl leading-6 font-semibold text-gray-900 mb-6 border-b border-gray-100 pb-3">Verification</h3>
               <div className="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                <div className="space-y-1 text-center">
+                <div className="space-y-1 text-center w-full">
                   <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <div className="flex text-sm text-gray-600 justify-center">
                     <label htmlFor="file-upload" className="relative cursor-pointer bg-transparent rounded-md font-medium text-[#0052ff] hover:text-blue-500 focus-within:outline-none">
-                      <span>Upload Government ID</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" required />
+                      <span>{file ? file.name : "Upload Government ID"}</span>
+                      <input id="file-upload" name="file-upload" type="file" className="sr-only" required accept=".png,.jpg,.jpeg,.pdf" onChange={handleFileChange} />
                     </label>
                   </div>
-                  <p className="text-xs text-gray-500">PNG, JPG, PDF up to 10MB</p>
+                  {!file && <p className="text-xs text-gray-500">PNG, JPG, PDF up to 10MB</p>}
                 </div>
               </div>
             </div>
@@ -215,4 +303,3 @@ export default function BecomeVendorPage() {
     </div>
   );
 }
-
